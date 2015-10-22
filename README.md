@@ -24,7 +24,7 @@ brew /usr/local/Cellar
 
 ## Installation
 You simply need to arrange for the f script appropriate for your shell is
-sourced, and that a ~/.f or another alias file pointed to by `$F_PATH` exists.
+sourced, and that a `~/.f` or another alias file pointed to by `$F_PATH` exists.
 
 For quick installation, do the following:
 ```bash
