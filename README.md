@@ -33,4 +33,4 @@ git clone git@github.com:adamheins/f ~/.fav
 ```
 
 ## License
-MIT license. See the license for details.
+MIT license. See the LICENSE file for details.
