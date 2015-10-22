@@ -5,16 +5,16 @@ f_source_str="[ -f $f_source_dir/f.bash ] && source $f_source_dir/f.bash"
 
 if [ -f ~/.bashrc ]; then
   echo "$f_source_str" >> ~/.bashrc
-  echo "$f_source_str appended to ~/.bashrc"
+  echo "$f_source_str >> ~/.bashrc"
 fi
 
 if [ -f ~/.zshrc ]; then
   echo "$f_source_str" >> ~/.zshrc
-  echo "$f_source_str appended to ~/.zshrc"
+  echo "$f_source_str >> ~/.zshrc"
 fi
 
 cat << EOF
 Finished. Restart your shell or reload config file.
-   source ~/.bashrc  # bash
-   source ~/.zshrc   # zsh
+   source ~/.bashrc
+   source ~/.zshrc
 EOF
