@@ -1,20 +1,21 @@
 #!/usr/bin/env bash
 
 f_source_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-f_source_str="[ -f $f_source_dir/f.bash ] && source $f_source_dir/f.bash"
 
 if [ -f ~/.bashrc ]; then
-  echo "$f_source_str" >> ~/.bashrc
-  echo "$f_source_str >> ~/.bashrc"
+  f_source_str="[ -f $f_source_dir/f.bash ] && source $f_source_dir/f.bash"
+  echo -e "\n$f_source_str" >> ~/.bashrc
+  echo -e "Appending the following to ~/.bashrc:"
+  echo -e "  $f_source_str\n"
 fi
 
 if [ -f ~/.zshrc ]; then
-  echo "$f_source_str" >> ~/.zshrc
-  echo "$f_source_str >> ~/.zshrc"
+  f_source_str="[ -f $f_source_dir/f.zsh ] && source $f_source_dir/f.zsh"
+  echo -e "\n$f_source_str" >> ~/.zshrc
+  echo -e "Appending the following to ~/.zshrc:"
+  echo -e "  $f_source_str\n"
 fi
 
-cat << EOF
-Finished. Restart your shell or reload config file.
-   source ~/.bashrc
-   source ~/.zshrc
-EOF
+echo -e "Finished. Restart your shell or reload config file."
+echo -e "  source ~/.bashrc"
+echo -e "  source ~/.zshrc"
