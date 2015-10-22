@@ -29,10 +29,8 @@ sourced, and that a ~/.f or another alias file pointed to by `$F_PATH` exists.
 For quick installation, do the following:
 ```bash
 git clone git@github.com:adamheins/f ~/.fav
-./fav/setup.sh
+./fav/setup
 ```
 
 ## License
 MIT license. See the license for details.
-
-

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+f_source_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+f_source_str="[ -f $f_source_dir/f.bash ] && source $f_source_dir/f.bash"
+
+if [ -f ~/.bashrc ]; then
+  echo "$f_source_str" >> ~/.bashrc
+  echo "$f_source_str appended to ~/.bashrc"
+fi
+
+if [ -f ~/.zshrc ]; then
+  echo "$f_source_str" >> ~/.zshrc
+  echo "$f_source_str appended to ~/.zshrc"
+fi
+
+cat << EOF
+Finished. Restart your shell or reload config file.
+   source ~/.bashrc  # bash
+   source ~/.zshrc   # zsh
+EOF
