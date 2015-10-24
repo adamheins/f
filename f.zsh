@@ -17,6 +17,7 @@ f() {
       ;;
     "-h"|"--help")
       echo -e "f is for favourite\nusage: f [-h] [alias]"
+      return 0
       ;;
     *)
       f_alias="$1"
