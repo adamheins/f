@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # Author: Adam Heins
 # Last modified: 2015-10-23
 
