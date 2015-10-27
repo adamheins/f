@@ -91,12 +91,6 @@ f() {
       ;;
   esac
 
-  # Check if the alias directory actually exists.
-  if [ ! -d "$f_alias_path" ]; then
-    echo "f: alias directory not found"
-    return 1
-  fi
-
   # All files in the f alias directory are search for aliases.
   for alias_file in "$f_alias_path"/*; do
     while read line || [[ -n "$line" ]]; do
