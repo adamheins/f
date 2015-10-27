@@ -1,5 +1,24 @@
+#    ffffffffffffffff
+#   f::::::::::::::::f
+#  f::::::::::::::::::f
+#  f::::::fffffff:::::f
+#  f:::::f       ffffff
+#  f:::::f
+# f:::::::ffffff
+# f::::::::::::f
+# f::::::::::::f
+# f:::::::ffffff
+#  f:::::f
+#  f:::::f            __               __                               _
+# f:::::::f (_)___   / _| ___  _ __   / _| __ ___   _____  _   _ _ __(_) |_ ___
+# f:::::::f | / __| | |_ / _ \| '__| | |_ / _` \ \ / / _ \| | | | '__| | __/ _ \
+# f:::::::f | \__ \ |  _| (_) | |    |  _| (_| |\ V / (_) | |_| | |  | | ||  __/
+# fffffffff |_|___/ |_|  \___/|_|    |_|  \__,_| \_/ \___/ \__,_|_|  |_|\__\___|
+#
+# Create shortcuts for your favourite directories, files, and git branches.
+#
 # Author: Adam Heins
-# Last modified: 2015-10-23
+# Last modified: 2015-10-26
 
 f() {
   if [ -z "$1" ]; then
@@ -67,8 +86,10 @@ f() {
       echo "f: no editor set"
       return 1
     fi
+  elif [ "$(git branch --list $f_path 2>/dev/null)" ]; then
+    git checkout "$f_path"
   else
-    echo "f: alias does not point to a file or directory"
+    echo "f: alias does not point to a file, directory, or git branch"
     return 1
   fi
   return 0
