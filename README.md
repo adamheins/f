@@ -56,6 +56,16 @@ z ~/.zshrc
 m master
 ```
 
+f is built to integrate with git, allowing you to have different branches for
+different tasks. For example, you may have separate work and personal branches
+with different aliases for each situation.
+
+Running `f --init` initializes the f alias directory as git repository and
+creates an initial commit. f also exposes the `--checkout` and `--branch`
+options, which run those git commands on the f alias directory. This allows for
+easy listing and switching between branches from anywhere. For other git
+commands, you need to actually use git within the f alias directory.
+
 ## Installation
 You simply need to arrange for the f script appropriate for your shell is
 sourced, and then run `f --init`.
