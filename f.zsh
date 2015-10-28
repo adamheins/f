@@ -18,7 +18,7 @@
 # Create shortcuts for your favourite directories, files, and git branches.
 #
 # Author: Adam Heins
-# Last modified: 2015-10-26
+# Last modified: 2015-10-27
 
 F_ALIAS_DEFAULT_PATH=~/.f
 
@@ -38,13 +38,15 @@ f() {
     echo "usage: f [-h] [-b] [-c] [alias]"
     echo ""
     echo "arguments:"
-    echo "  -i, --init        Initialize the f alias directory."
-    echo "  -b, --branch      Call git branch on the f alias directory."
-    echo "  -c, --checkout    Call git checkout on the f alias directory."
+    echo "  -b, --branch [args]     Call git branch on the f alias directory."
+    echo "  -c, --checkout [args]   Call git checkout on the f alias directory."
+    echo "  -p, --print [alias]     Prints an alias's value to stdout."
+    echo "  -i, --init              Initialize the f alias directory."
+    echo "  -l, --list              List all current f aliases."
     return 0
   fi
 
-  local f_alias_path line words f_alias f_path alias_file
+  local f_alias_path line words f_alias f_value alias_file print list
 
   # Find f alias directory to use.
   if [ -z "$F_ALIAS_PATH" ]; then
@@ -77,14 +79,21 @@ f() {
       [ -z "$2" ] && return 1
       f_alias="$2"
       ;;
+    "-b"|"--branch")
+      _do_in_dir_and_return "$f_alias_path" git branch "${@:2}"
+      return
+      ;;
     "-c"|"--checkout")
       [ ! -d "$f_alias_path" ]
       _do_in_dir_and_return "$f_alias_path" git checkout "${@:2}"
       return
       ;;
-    "-b"|"--branch")
-      _do_in_dir_and_return "$f_alias_path" git branch "${@:2}"
-      return
+    "-p"|"--print")
+      f_alias="$2"
+      print=1
+      ;;
+    "-l"|"--list")
+      list=1
       ;;
     *)
       f_alias="$1"
@@ -98,30 +107,46 @@ f() {
       [[ "${line:0:1}" == "#" ]] && continue
 
       words=(${(@s/ /)line})
+
+      # Skip lines with only whitespace.
+      [[ "${words[1]}" == "" ]] && continue
+
+      if [[ "$list" == 1 ]]; then
+        echo $words
+        continue
+      fi
+
       if [[ "${words[1]}" == "$f_alias" ]]; then
-        f_path=${words[2]}
-        f_path=${f_path:s/~/$HOME}
+        f_value=${words[2]}
+        if [[ "$print" == 1 ]]; then
+          echo "$f_value"
+          return 0
+        fi
+        # Perform tilde expansion.
+        f_value=${f_value:s/~/$HOME}
         break
       fi
     done < "$alias_file"
   done
 
-  if [ -z "$f_path" ]; then
+  [[ "$list" == 1 ]] && return 1
+
+  if [ -z "$f_value" ]; then
     echo "f: no such alias '$f_alias'"
     return 1
-  elif [ -d "$f_path" ]; then
-    cd $f_path
-  elif [ -f "$f_path" ]; then
+  elif [ -d "$f_value" ]; then
+    cd "$f_value"
+  elif [ -f "$f_value" ]; then
     if [ ! -z "$VISUAL" ]; then
-      "$VISUAL" "$f_path"
+      "$VISUAL" "$f_value"
     elif [ ! -z "$EDITOR" ]; then
-      "$EDITOR" $f_path
+      "$EDITOR" $f_value
     else
       echo "f: no editor set"
       return 1
     fi
-  elif [ "$(git branch --list $f_path 2>/dev/null)" ]; then
-    git checkout "$f_path"
+  elif [ "$(git branch --list $f_value 2>/dev/null)" ]; then
+    git checkout "$f_value"
   else
     echo "f: alias does not point to a file, directory, or git branch"
     return 1
