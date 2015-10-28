@@ -31,11 +31,11 @@ _do_in_dir_and_return() {
 
 f() {
   if [ -z "$1" ]; then
-    echo "usage: f [-h] [-b] [-c] [alias]"
+    echo "usage: f [-bchlp] [args] [alias]"
     return 1
   elif [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
     echo "f is for favourite"
-    echo "usage: f [-h] [-b] [-c] [alias]"
+    echo "usage: f [-bchlp] [args] [alias]"
     echo ""
     echo "arguments:"
     echo "  -b, --branch [args]     Call git branch on the f alias directory."
