@@ -66,6 +66,9 @@ options, which run those git commands on the f alias directory. This allows for
 easy listing and switching between branches from anywhere. For other git
 commands, you need to actually use git within the f alias directory.
 
+Other options are `--list`, which lists all current aliases, and `--print`,
+which takes an alias as an argument and prints its value.
+
 ## Installation
 You simply need to arrange for the f script appropriate for your shell is
 sourced, and then run `f --init`.
@@ -75,6 +78,17 @@ For quick installation, run the following in your terminal:
 git clone git@github.com:adamheins/f ~/.f-source
 ~/.f-source/install
 ```
+
+## Advantages over plain shell aliases
+Why not just alias all of your common directories, files, and git branches
+directly in shell? Well, you could do that, but here are a few advantages of
+using f instead:
+1. f is effectively a namespace. f aliases won't conflict with other aliases,
+   shell functions, or binaries on your `$PATH`.
+2. f automatically knows what to do with each alias, be it a file, directory, or
+   git branch. This allows you to just specify a name/path, rather than the
+   command as well.
+3. f contains support for git as well as other convenience options.
 
 ## License
 MIT license. See the LICENSE file for details.
