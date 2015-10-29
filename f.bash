@@ -59,7 +59,7 @@ f() {
   # If it doesn't exist and --init wasn't passed, fail.
   if [ ! -d "$f_alias_path" ]; then
     if [[ "$1" == "-i" ]] || [[ "$1" == "--init" ]]; then
-      mkdir -p "$f_alias_path"
+      mkdir "$f_alias_path"
       local cur_dir=$(pwd)
       cd "$f_alias_path"
       git init
@@ -70,6 +70,7 @@ f() {
       return
     else
       echo "f: alias directory not found"
+      echo "run 'f --init' to create a new f alias directory"
       return 1
     fi
   fi
