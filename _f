@@ -1,0 +1,4 @@
+#compdef f
+
+_f_paths=(~/.f)
+_path_files -W _f_paths
