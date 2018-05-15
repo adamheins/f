@@ -1,4 +1,18 @@
 #compdef f
 
 _f_paths=(~/.f)
-_path_files -W _f_paths
+
+
+# Only autocomplete symlinks in the f directory, but we allow for
+# autocompletion for arguments to commands that have been manually typed.
+_arguments -C '1: :_path_files -W _f_paths' '*::args:->args'
+
+
+case $state in
+  (args)
+    case $line[1] in
+      (-a|--add)   _files ;;
+      (-p|--print) _path_files -W _f_paths ;;
+    esac
+    ;;
+esac

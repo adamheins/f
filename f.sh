@@ -21,7 +21,7 @@ F_ALIAS_DEFAULT_PATH=~/.f
 
 f() {
   if [ -z "$1" ]; then
-    echo "usage: f [-ahlp] [args] [alias]"
+    echo "Argument required. See f --help."
     return 1
   fi
 
@@ -42,13 +42,12 @@ f() {
   case "$1" in
     "-h"|"--help")
       echo "f is for favourite"
-      echo "usage: f [-ahlp] [args] [alias]"
-      echo ""
-      echo "arguments:"
-      echo "  -a, --add SRC ALIAS    Add a new alias."
-      echo "  -h, --help             Print this help text."
-      echo "  -l, --list             List all current f aliases."
-      echo "  -p, --print ALIAS      Prints an alias's value to stdout."
+      echo "usage:"
+      echo "  f ALIAS                Navigate to ALIAS."
+      echo "  f -a, --add SRC ALIAS  Add a new alias."
+      echo "  f -h, --help           Print this help text."
+      echo "  f -l, --list           List all current f aliases."
+      echo "  f -p, --print ALIAS    Prints an alias's value to stdout."
       ;;
     "-a"|"--add")
       if [ -z $3 ]; then
