@@ -66,7 +66,7 @@ f() {
       ls "$f_alias_path"/
       ;;
     *)
-      local entry=$(readlink "$f_alias_path"/"$1")
+      local entry="$f_alias_path/$1"
       if [ -d $entry ]; then
         cd $entry
       else
