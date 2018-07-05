@@ -11,8 +11,9 @@ _arguments -C '1: :_path_files -W _f_paths' '*::args:->args'
 case $state in
   (args)
     case $line[1] in
-      (-a|--add)   _files ;;
-      (-p|--print) _path_files -W _f_paths ;;
+      (-a|--add)    _files ;;
+      (-p|--print)  _path_files -W _f_paths ;;
+      (-d|--delete) _path_files -W _f_paths ;;
     esac
     ;;
 esac

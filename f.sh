@@ -44,10 +44,12 @@ f() {
       echo "f is for favourite"
       echo "usage:"
       echo "  f ALIAS                Navigate to ALIAS."
-      echo "  f -a, --add SRC ALIAS  Add a new alias."
+      echo "  f -a, --add SRC ALIAS  Add a new ALIAS point to SRC."
+      echo "  f -c, --clean          Remove all broken symlinks."
+      echo "  f -d, --delete ALIAS   Remove ALIAS."
       echo "  f -h, --help           Print this help text."
       echo "  f -l, --list           List all current f aliases."
-      echo "  f -p, --print ALIAS    Prints an alias's value to stdout."
+      echo "  f -p, --print ALIAS    Prints ALIAS's value to stdout."
       ;;
     "-a"|"--add")
       if [ -z $3 ]; then
@@ -56,9 +58,20 @@ f() {
       fi
       ln -s $(realpath "$2") "$f_alias_path"/"$3"
       ;;
+    "-c"|"--clean")
+      find $f_alias_path -xtype l -delete
+      ;;
+    "-d"|"--delete")
+      if [ -z $2 ]; then
+        echo "usage: f $1 ALIAS"
+        return 1
+      fi
+      rm "$f_alias_path"/"$2"
+      ;;
     "-p"|"--print")
       if [ -z $2 ]; then
         echo "usage: f $1 ALIAS"
+        return 1
       fi
       readlink "$f_alias_path"/"$2"
       ;;
