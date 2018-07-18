@@ -66,14 +66,14 @@ f() {
         echo "usage: f $1 ALIAS"
         return 1
       fi
-      rm "$f_alias_path"/"$2"
+      rm "$f_alias_path/$2"
       ;;
     "-p"|"--print")
       if [ -z $2 ]; then
         echo "usage: f $1 ALIAS"
         return 1
       fi
-      readlink "$f_alias_path"/"$2"
+      readlink "$f_alias_path/$2"
       ;;
     "-l"|"--list")
       ls "$f_alias_path"/
@@ -81,9 +81,9 @@ f() {
     *)
       local entry="$f_alias_path/$1"
       if [ -d $entry ]; then
-        cd $entry
-      else
-        "$EDITOR" $entry
+        cd "$entry"
+      elif [ -f "$entry" ]; then
+        "$EDITOR" $(readlink "$entry")
       fi
       ;;
   esac
