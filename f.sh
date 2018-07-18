@@ -44,7 +44,7 @@ f() {
       echo "f is for favourite"
       echo "usage:"
       echo "  f ALIAS                Navigate to ALIAS."
-      echo "  f -a, --add SRC ALIAS  Add a new ALIAS point to SRC."
+      echo "  f -a, --add SRC ALIAS  Add a new ALIAS pointing to SRC."
       echo "  f -c, --clean          Remove all broken symlinks."
       echo "  f -d, --delete ALIAS   Remove ALIAS."
       echo "  f -h, --help           Print this help text."
